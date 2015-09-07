@@ -6,9 +6,9 @@
 # Author: Emre Neftci
 #
 # Creation Date : 14-07-2015
-# Last Modified : Mon 07 Sep 2015 10:37:08 AM UTC
+# Last Modified : Mon 07 Sep 2015 11:33:33 AM UTC
 #
-# Copyright : (c) 
+# Copyright : Emre Neftci (c) 
 # Licence : GPLv2
 #----------------------------------------------------------------------------- 
 # -*- encoding: utf-8 -*-

@@ -1,12 +1,12 @@
 # File Name : questions_relu.py
-# Purpose:
+# Purpose: Writes the parameters into matlab .mat format for True_North
 #
-# Author: Emre Neftci
+# Author: Emre Neftci, Peter Diehl, Guido Zarrella
 #
 # Creation Date : 14-07-2015
-# Last Modified : Tue 14 Jul 2015 02:34:49 PM PDT
+# Last Modified : Mon 07 Sep 2015 11:32:02 AM UTC
 #
-# Copyright : (c) 
+# Copyright : Emre Neftci (c) 
 # Licence : GPLv2
 #----------------------------------------------------------------------------- 
 
@@ -48,9 +48,8 @@ def save_mat(model_path=None,
     
 
 if __name__ == '__main__':
-    print sys.argv[1]
+    print 'Loading ' + sys.argv[1]
     out = save_mat(sys.argv[1])
-    print out
     
     
     

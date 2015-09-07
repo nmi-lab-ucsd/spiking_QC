@@ -6,18 +6,17 @@
 # Author: Emre Neftci
 #
 # Creation Date : 14-07-2015
-# Last Modified : Fri 17 Jul 2015 06:58:29 AM PDT
+# Last Modified : Mon 07 Sep 2015 11:32:14 AM UTC
 #
-# Copyright : (c) 
+# Copyright : Emre Neftci (c) 
 # Licence : GPLv2
 #----------------------------------------------------------------------------- 
 
 import sys, cPickle
 import numpy as np
+from QC_dataset import Questions
 from scipy.io import loadmat, savemat
 from pylearn2.utils import serial
-from theano import tensor as T
-from theano import function
 
 round_it = True
 
@@ -61,8 +60,6 @@ assert np.prod(out['softmax_b'] == 0)==1
 assert np.prod(out['projection_layer_b'] == 0)==1
 
 
-
-
 for k,o in out.iteritems():
     if k[0] != '_':
         o[:] *= B 
@@ -77,12 +74,6 @@ def relu(x):
 def fprop(u, rout, parms):
     pout = relu(np.dot(u*A,   parms['projection_layer_W'])+parms['projection_layer_b'])
     return relu(np.dot(pout,parms['recurrent_layer_W']) + np.dot(rout,parms['recurrent_layer_U']) + parms['recurrent_layer_b']), pout
-
-#For testing/validating
-#model = serial.load('questions_73_78_.35_16_48.pkl')
-#X = model.get_input_space().make_theano_batch()
-#Y = model.fprop(X)
-#f = function(X, Y[0], allow_input_downcast=True)
 
 test_data = cPickle.load(file('questions_test.pkl','r'))
 test_it = test_data.iterator(batch_size=1, mode='sequential')
@@ -120,4 +111,4 @@ matlab_out = out.copy()
 matlab_out['test_data']=test_data
 matlab_out['test_labels']=test_labels
 
-savemat('weights_4bit.mat', matlab_out)
+savemat('QC_weights_4bit.mat', matlab_out)

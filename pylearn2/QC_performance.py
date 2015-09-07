@@ -6,15 +6,16 @@
 # Author: Emre Neftci
 #
 # Creation Date : 14-07-2015
-# Last Modified : Mon 07 Sep 2015 10:10:23 AM UTC
+# Last Modified : Mon 07 Sep 2015 11:33:26 AM UTC
 #
-# Copyright : (c) 
+# Copyright : Emre Neftci (c) 
 # Licence : GPLv2
 #----------------------------------------------------------------------------- 
 import sys
 import os
 import argparse
 import numpy as np
+from QC_dataset import Questions
 
 from pylearn2.utils import serial
 from theano import tensor as T

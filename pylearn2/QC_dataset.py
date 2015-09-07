@@ -1,8 +1,15 @@
-"""
-Dataset wrapper for the Questions dataset
-Modified from penn treeb ank
-"""
-__authors__ = "Emre Neftci"
+#-----------------------------------------------------------------------------
+# File Name : QC_dataset.yaml
+# Purpose: pylearn2 yaml script for question classification, Dataset wrapper for the Questions dataset Modified from penn tree bank script
+#
+# Author: Emre Neftci, Peter Diehl, Guido Zarrella
+#
+# Creation Date : 14-07-2015
+# Last Modified : Mon 07 Sep 2015 11:33:16 AM UTC
+#
+# Copyright : Emre Neftci (c) 
+# Licence : GPLv2
+#----------------------------------------------------------------------------- 
 
 from functools import wraps
 import warnings, os, collections

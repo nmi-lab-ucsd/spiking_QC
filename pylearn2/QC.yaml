@@ -7,7 +7,7 @@
 # Creation Date : 14-07-2015
 # Last Modified : Fri 17 Jul 2015 06:58:29 AM PDT
 #
-# Copyright : (c) 
+# Copyright : Emre Neftci (c) 
 # Licence : GPLv2
 #----------------------------------------------------------------------------- 
 !obj:pylearn2.train.Train {
