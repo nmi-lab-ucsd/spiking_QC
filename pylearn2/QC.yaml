@@ -1,0 +1,75 @@
+#-----------------------------------------------------------------------------
+# File Name : questions_classification.yaml
+# Purpose: pylearn2 yaml script for question classification
+#
+# Author: Emre Neftci, Peter Diehl, Guido Zarrella
+#
+# Creation Date : 14-07-2015
+# Last Modified : Fri 17 Jul 2015 06:58:29 AM PDT
+#
+# Copyright : (c) 
+# Licence : GPLv2
+#----------------------------------------------------------------------------- 
+!obj:pylearn2.train.Train {
+  dataset: !pkl: "questions_train.pkl",
+
+  model: !obj:pylearn2.sandbox.rnn.models.rnn.RNN {
+    input_space: !obj:pylearn2.sandbox.rnn.space.SequenceSpace {
+      space: !obj:pylearn2.space.VectorSpace {
+        dim: 64,
+      },
+    },
+    layers: [
+      !obj:pylearn2.models.mlp.RectifiedLinear {
+        layer_name: 'projection_layer',
+        dim: 48,
+        b_lr_scale: .0,
+        irange: 0.04,
+      },
+      !obj:pylearn2.sandbox.rnn.models.rnn.Recurrent {
+        layer_name: 'recurrent_layer',
+        dim: 16,
+        b_lr_scale: .0,
+        nonlinearity: 'relu',
+        irange: 0.04,
+      },
+      !obj:pylearn2.models.mlp.Softmax {
+        layer_name: 'softmax',
+        n_classes: 6,
+        b_lr_scale: .0,
+        irange: 0.02,
+      }
+    ],
+  },
+
+  algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+    learning_rule: !obj:pylearn2.training_algorithms.learning_rule.Momentum {
+        init_momentum: 0,
+        prob_round: True,
+        rr: 7,
+        scale: .5},
+    learning_rate: 0.1,
+    batch_size: 20,
+    monitoring_batch_size: 20,
+    monitoring_dataset: {
+        valid: !pkl: "questions_test.pkl",
+        },
+    termination_criterion: !obj:pylearn2.termination_criteria.MonitorBased {
+        channel_name: "valid_objective",
+        N: 100,
+        prop_decrease: 0.
+        },
+    cost: !obj:pylearn2.sandbox.rnn.costs.gradient_clipping.GradientClipping {
+      clipping_value: 1,
+      cost: !obj:pylearn2.costs.mlp.Default {}
+    },
+  },
+
+  extensions: [ 
+      !obj:pylearn2.train_extensions.best_params.MonitorBasedSaveBest {
+      channel_name: "valid_objective",
+      save_path: "${PYLEARN2_TRAIN_FILE_FULL_STEM}_best.pkl"},
+  ],
+
+  save_freq: 1,
+}
