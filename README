@@ -15,5 +15,13 @@ THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~
 Train the RNN:
 THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 train.py QC.yaml
 
-Test the trained RNN
+This should save the parameters in QC.pkl after every iteration. The training should stop whern the validation starts to go up consistently
+
+Now, test the trained RNN
 THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' python2 QC_performance.py QC.pkl
+
+Save the discretized weight parameters
+THEANO_FLAGS='floatX=float32,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 ./save_weights.py QC.pkl
+
+Test the discretized weights paramters
+THEANO_FLAGS='floatX=float32,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 ./QC_test_ReLU.py QC.pkl
