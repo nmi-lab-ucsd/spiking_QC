@@ -1,0 +1,19 @@
+#-----------------------------------------------------------------------------
+# Author: Emre Neftci
+#
+# Creation Date : 17-11-2015
+# Last Modified : 
+#
+# Copyright : (c) 
+# Licence : GPLv2
+#----------------------------------------------------------------------------- 
+
+
+Create the dataset:
+THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 QC_dataset.py
+
+Train the RNN:
+THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 train.py QC.yaml
+
+Test the trained RNN
+THEANO_FLAGS='floatX=float64,device=cpu,nvcc.fastmath=True' python2 QC_performance.py QC.pkl
