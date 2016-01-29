@@ -5,7 +5,7 @@
 # Author: Emre Neftci, Peter Diehl, Guido Zarrella
 #
 # Creation Date : 14-07-2015
-# Last Modified : Mon 07 Sep 2015 11:33:16 AM UTC
+# Last Modified : Thu 28 Jan 2016 03:20:12 PM PST
 #
 # Copyright : Emre Neftci (c) 
 # Licence : GPLv2
@@ -84,7 +84,7 @@ def read_normalized_sentences(input_filename, output_filename = None, which_targ
     if output_filename == None:
         normalize_words('/tmp/sentences', '/tmp/nse')
         with open('/tmp/nse', 'r') as fh:
-            return fh.readlines(), tags
+            return [r.strip() for r in fh.readlines()], tags
     else:
         normalize_words('/tmp/sentences', output_filename)
 
@@ -128,6 +128,7 @@ class Questions(VectorSpacesDataset):
         to predict the subsequent word.
     """
     def __init__(self, which_set, which_targets, word2vec_dict={}, eos = True, one_hot_label=True, padding = False, debug=False):
+        #eos: additional end-of-sentence vector?
         self.eos = eos
         self.dim_features = len(word2vec_dict.values()[0])
         self.eos_vector = np.zeros(self.dim_features)
@@ -191,8 +192,8 @@ class Questions(VectorSpacesDataset):
         all_labels = np.unique(labels)
 
         #Use integers instead of strings for labels, and map labels
-        self.num_categories = len(np.unique(labels))+0
-        self.labels_dict = labels_dict = dict(zip(all_labels,0+np.arange(len(all_labels)))) #0+ so that 0 is the not care label
+        self.num_categories = len(np.unique(labels))
+        self.labels_dict = labels_dict = dict(zip(all_labels,np.arange(len(all_labels))))
         self.labels_int = labels_int = np.array(map(labels_dict.get, labels)).reshape(-1,1)
 
         #Create data and label vector with not care = 0 labels for all but the last word in the sentence.

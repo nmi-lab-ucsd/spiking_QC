@@ -6,7 +6,7 @@
 # Author: Emre Neftci
 #
 # Creation Date : 14-07-2015
-# Last Modified : Mon 07 Sep 2015 11:33:26 AM UTC
+# Last Modified : Mon 04 Jan 2016 07:11:56 PM PST
 #
 # Copyright : Emre Neftci (c) 
 # Licence : GPLv2
@@ -45,6 +45,7 @@ while True:
         break
 
 print "Training data performance"
+print len(a)
 print np.mean(np.array(a)==np.array(b))
 
 a=[]
@@ -59,5 +60,6 @@ while True:
         break
 
 print "Testing data performance"
+print len(a)
 print np.mean(np.array(a)==np.array(b))
 
