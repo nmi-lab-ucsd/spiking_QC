@@ -25,3 +25,6 @@ THEANO_FLAGS='floatX=float32,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~
 
 Test the discretized weights paramters
 THEANO_FLAGS='floatX=float32,device=cpu,nvcc.fastmath=True' PYLEARN2_DATA_PATH=~/Projects/share/data python2 ./QC_test_ReLU.py QC.pkl
+
+#To download basic.wikiw2v.64.ascii
+https://drive.google.com/file/d/0B7CeL_WOYFxpNmFuYnNoZFJpQ28/view?usp=sharing
